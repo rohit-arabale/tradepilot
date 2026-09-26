@@ -1,0 +1,26 @@
+# One-command boot for the YOLO detection microservice.
+# The Express backend + Vite frontend are run with npm directly (see CLAUDE.md).
+#
+# Usage:
+#   docker compose up yolo --build
+#
+# YOLO listens on :8000. Vite proxies /yolo/* to it.
+
+services:
+  yolo:
+    build:
+      context: ./yolo
+      dockerfile: Dockerfile
+    container_name: tradepilot-yolo
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - YOLO_MODEL_PATH=yolo11n.pt
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "-O", "/dev/null", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s

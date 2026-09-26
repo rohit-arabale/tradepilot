@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: tradepilot-backend
+    runtime: node
+    rootDir: backend
+    region: singapore
+    plan: free
+    buildCommand: npm ci && npm run build
+    startCommand: node dist/index.js
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      # Set these in the Render dashboard for your own GCP project / frontend
+      - key: GOOGLE_CLOUD_PROJECT
+        sync: false
+      - key: VERTEX_AI_LOCATION
+        value: us-central1
+      - key: FRONTEND_URL
+        sync: false
+      # Secrets — leave blank in YAML, paste values in the Render dashboard
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: GOOGLE_APPLICATION_CREDENTIALS_JSON
+        sync: false
+      - key: GOOGLE_CLOUD_CREDENTIALS_JSON
+        sync: false

@@ -1,0 +1,32 @@
+{
+  "name": "tradepilot",
+  "private": true,
+  "version": "0.0.0",
+  "description": "TradePilot — monorepo runner: installs and runs the backend + frontend together.",
+  "scripts": {
+    "postinstall": "npm install --workspaces --include-workspace-root --ignore-scripts",
+    "dev": "concurrently -k -n backend,frontend -c blue,magenta \"npm --prefix backend run dev\" \"npm --prefix frontend run dev\"",
+    "quickstart": "node scripts/quickstart.mjs",
+    "setup": "npm install --ignore-scripts && npm run setup:env",
+    "setup:env": "node scripts/quickstart.mjs --setup-only",
+    "build": "npm --prefix backend run build && npm --prefix frontend run build",
+    "start": "concurrently -k -n backend,frontend -c blue,magenta \"npm --prefix backend run start\" \"npm --prefix frontend run preview\"",
+    "seed:demo": "npm --prefix backend run seed:demo"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  },
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "author": "Rohit Arabale",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rohit-arabale/tradepilot.git"
+  },
+  "homepage": "https://github.com/rohit-arabale/tradepilot#readme",
+  "bugs": {
+    "url": "https://github.com/rohit-arabale/tradepilot/issues"
+  }
+}

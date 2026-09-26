@@ -1,0 +1,12 @@
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.pt
+*.onnx
+models/
+runs/
+.env
+.DS_Store
+*.log

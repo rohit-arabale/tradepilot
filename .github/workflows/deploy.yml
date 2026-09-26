@@ -1,0 +1,72 @@
+name: Deploy TradePilot to production
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-prod
+  cancel-in-progress: false
+
+jobs:
+  deploy-frontend:
+    name: Frontend → Vercel
+    runs-on: ubuntu-latest
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+
+      - name: Pull Vercel env (production)
+        working-directory: frontend
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Build
+        working-directory: frontend
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Deploy prebuilt
+        working-directory: frontend
+        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+  deploy-backend:
+    name: Backend → GCP VM
+    runs-on: ubuntu-latest
+    steps:
+      - name: SSH to VM — pull, rebuild backend + SPA, restart
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: tradepilot.duckdns.org
+          username: ${{ secrets.VM_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script_stop: true
+          command_timeout: 10m
+          script: |
+            set -e
+            cd /home/${{ secrets.VM_USER }}/app
+            git fetch --all --tags
+            git reset --hard origin/main
+
+            # Backend
+            cd /home/${{ secrets.VM_USER }}/app/backend
+            npm ci
+            npm run build
+            sudo systemctl restart tradepilot-backend.service
+            sleep 2
+            sudo systemctl is-active tradepilot-backend.service
+
+            # Caddy-served SPA at tradepilot.duckdns.org root
+            cd /home/${{ secrets.VM_USER }}/app/frontend
+            npm ci
+            npm run build
+            sudo find /var/www/tradepilot -mindepth 1 -delete
+            sudo cp -r dist/. /var/www/tradepilot/

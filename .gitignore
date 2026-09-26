@@ -1,0 +1,55 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+*.tsbuildinfo
+
+# Environment
+.env
+.env.local
+.env.*.local
+.env.development.local
+.env.production.local
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Test/coverage
+coverage/
+.nyc_output/
+
+# Misc
+*.pem
+*.key
+backend/Config/*.json
+!backend/Config/.gitkeep
+
+# Reference projects pasted in for context (not part of the build)
+yolo_reference/
+
+# Design manifesto — developer-side reference, not shipped
+*.txt
+# ...but keep the Python dependency list (otherwise the YOLO service can't be installed)
+!yolo/requirements.txt
+
+# YOLO service Python venv + cached weights
+yolo/.venv/
+yolo/__pycache__/
+yolo/*.pt

@@ -1,0 +1,60 @@
+{
+  "name": "tradepilot-frontend",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@googlemaps/js-api-loader": "^2.1.1",
+    "@react-pdf/renderer": "^4.3.0",
+    "@tailwindcss/vite": "^4.0.16",
+    "@tanstack/react-query": "^5.101.0",
+    "@trpc/client": "^11.17.0",
+    "@trpc/react-query": "^11.17.0",
+    "@types/google.maps": "^3.65.1",
+    "axios": "^1.9.0",
+    "cobe": "^0.6.4",
+    "date-fns": "^4.1.0",
+    "file-saver": "^2.0.5",
+    "framer-motion": "^12.15.0",
+    "jwt-decode": "^4.0.0",
+    "lucide-react": "^0.511.0",
+    "papaparse": "^5.5.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-icons": "^5.5.0",
+    "react-intersection-observer": "^9.16.0",
+    "react-router-dom": "^7.4.0",
+    "recharts": "^2.15.1",
+    "superjson": "^2.2.6",
+    "tailwindcss": "^4.0.16"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.21.0",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^4.3.4",
+    "eslint": "^9.21.0",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-react-refresh": "^0.4.19",
+    "globals": "^15.15.0",
+    "typescript": "^6.0.3",
+    "vite": "^6.2.0"
+  },
+  "author": "Rohit Arabale",
+  "description": "TradePilot frontend — React 18 + Vite",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rohit-arabale/tradepilot.git",
+    "directory": "frontend"
+  },
+  "homepage": "https://github.com/rohit-arabale/tradepilot#readme",
+  "bugs": {
+    "url": "https://github.com/rohit-arabale/tradepilot/issues"
+  }
+}

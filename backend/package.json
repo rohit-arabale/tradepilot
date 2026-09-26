@@ -1,0 +1,59 @@
+{
+  "name": "tradepilot-backend",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "seed:demo": "tsx src/scripts/seed-demo.ts",
+    "seed:demo-routes": "tsx src/scripts/seed-demo-routes.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Rohit Arabale",
+  "license": "ISC",
+  "description": "TradePilot backend — Express 5 + tRPC 11 API",
+  "dependencies": {
+    "@google-cloud/storage": "^7.16.0",
+    "@google-cloud/vision": "^5.1.0",
+    "@google/genai": "^2.8.0",
+    "@trpc/server": "^11.17.0",
+    "axios": "^1.9.0",
+    "bcrypt": "^6.0.0",
+    "body-parser": "^2.2.0",
+    "cheerio": "^1.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "express-rate-limit": "^7.5.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.15.1",
+    "multer": "^1.4.5-lts.2",
+    "node-cache": "^5.1.2",
+    "puppeteer": "^24.10.0",
+    "superjson": "^2.2.6",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/multer": "^2.1.0",
+    "@types/node": "^25.9.2",
+    "tsx": "^4.22.4",
+    "typescript": "^6.0.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rohit-arabale/tradepilot.git",
+    "directory": "backend"
+  },
+  "homepage": "https://github.com/rohit-arabale/tradepilot#readme",
+  "bugs": {
+    "url": "https://github.com/rohit-arabale/tradepilot/issues"
+  }
+}
