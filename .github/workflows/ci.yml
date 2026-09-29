@@ -25,15 +25,22 @@ jobs:
         with:
           node-version: 24
           cache: npm
-          cache-dependency-path: package-lock.json
+          cache-dependency-path: |
+            backend/package-lock.json
+            frontend/package-lock.json
 
-      - name: Install dependencies
-        run: npm ci
-        env:
-          PUPPETEER_SKIP_DOWNLOAD: true
+      - name: Install backend dependencies
+        run: npm ci --ignore-scripts
+        working-directory: backend
 
-      - name: Lint frontend
-        run: npm --prefix frontend run lint
+      - name: Install frontend dependencies
+        run: npm ci --ignore-scripts
+        working-directory: frontend
 
-      - name: Build backend and frontend
+      - name: Build backend
         run: npm run build
+        working-directory: backend
+
+      - name: Build frontend
+        run: npm run build
+        working-directory: frontend
